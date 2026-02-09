@@ -1,5 +1,7 @@
-from fastapi import APIRouter, HTTPException
+from fastapi import APIRouter, HTTPException, Depends
+from app.database.session import get_db
 from app.services.ecommerce_service import get_product_aggregate
+from app.services.product_service import get_all_products
 from app.core.cache import get_cache, set_cache
 
 router = APIRouter(prefix="/api/products", tags=["Products"])
@@ -19,3 +21,7 @@ async def get_product(product_id: int):
 
     set_cache(cache_key, data)
     return data
+
+@router.get("/")
+async def list_products(db=Depends(get_db)):
+    return await get_all_products(db)
