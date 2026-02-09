@@ -7,8 +7,14 @@ from app.controllers.product_transaction_controller import (
 )
 from app.controllers.product_delete_controller import soft_delete_product
 from app.deps import admin_only
+from app.services.admin_service import get_admin_stats
+
 
 router = APIRouter(prefix="/admin/products", tags=["Admin Products"])
+
+@router.get("/stats")
+async def admin_stats():
+    return await get_admin_stats()
 
 @router.post("")
 async def create_product(
