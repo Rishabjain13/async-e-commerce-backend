@@ -7,6 +7,7 @@ from app.routes.address_routes import router as address_router
 from app.routes.shipping_routes import router as shipping_router
 from app.routes.search_routes import router as search_router
 from app.routes.payment_routes import router as payment_router
+from app.routes.health import router as health_router
 
 app = FastAPI(title="Async E-commerce API Gateway")
 
@@ -18,3 +19,4 @@ app.include_router(address_router)
 app.include_router(shipping_router)
 app.include_router(search_router)
 app.include_router(payment_router)
+app.include_router(health_router)
